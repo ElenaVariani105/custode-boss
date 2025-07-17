@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Il Custode - Boss Finale</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 40px;
+    }
+    #boss {
+      width: 300px;
+      height: 300px;
+      background: url('https://i.imgur.com/YOUR_IMAGE_ID.png') no-repeat center/contain;
+      margin: 0 auto 20px;
+      cursor: pointer;
+      border: 3px solid #aa0000;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #aa0000;
+    }
+    #message {
+      margin: 20px;
+      font-size: 18px;
+    }
+    #secretLink {
+      display: none;
+      margin-top: 30px;
+      font-size: 22px;
+      color: #ff4444;
+      text-decoration: none;
+      border: 2px solid #ff4444;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+    #secretLink:hover {
+      background: #ff4444;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Il Custode</h1>
+  <div id="boss" title="Cliccami per combattere il Custode!"></div>
+  <div id="message">Clicca 30 volte per sconfiggere il Custode.</div>
+
+  <a id="secretLink" href="https://tuo-link-al-prossimo-livello.com" target="_blank">Vai al prossimo livello</a>
+
+  <script>
+    const boss = document.getElementById('boss');
+    const message = document.getElementById('message');
+    const secretLink = document.getElementById('secretLink');
+    let clicks = 0;
+    const maxClicks = 30;
+
+    boss.addEventListener('click', () => {
+      clicks++;
+      const remaining = maxClicks - clicks;
+      if (remaining > 0) {
+        message.textContent = `Hai colpito il Custode! Mancano ${remaining} colpi.`;
+      } else {
+        message.textContent = 'Il Custode è stato sconfitto!';
+        secretLink.style.display = 'inline-block';
+        boss.style.pointerEvents = 'none'; // disabilita altri click
+      }
+    });
+  </script>
+
+</body>
+</html>
