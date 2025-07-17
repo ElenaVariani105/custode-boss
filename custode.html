@@ -20,6 +20,22 @@
       border: 3px solid #aa0000;
       border-radius: 10px;
       box-shadow: 0 0 20px #aa0000;
+      position: relative;
+    }
+    #hpBarContainer {
+      width: 300px;
+      height: 30px;
+      background: #444;
+      border: 2px solid #aa0000;
+      border-radius: 15px;
+      margin: 0 auto 20px;
+      overflow: hidden;
+    }
+    #hpBar {
+      height: 100%;
+      width: 100%;
+      background: #ff4444;
+      transition: width 0.2s ease;
     }
     #message {
       margin: 20px;
@@ -45,7 +61,12 @@
 
   <h1>Il Custode</h1>
   <div id="boss" title="Cliccami per combattere il Custode!"></div>
-  <div id="message">Clicca 30 volte per sconfiggere il Custode.</div>
+
+  <div id="hpBarContainer">
+    <div id="hpBar"></div>
+  </div>
+
+  <div id="message">Clicca 1200 volte per sconfiggere il Custode.</div>
 
   <a id="secretLink" href="https://tuo-link-al-prossimo-livello.com" target="_blank">Vai al prossimo livello</a>
 
@@ -53,12 +74,21 @@
     const boss = document.getElementById('boss');
     const message = document.getElementById('message');
     const secretLink = document.getElementById('secretLink');
+    const hpBar = document.getElementById('hpBar');
+
     let clicks = 0;
-    const maxClicks = 30;
+    const maxClicks = 1200;
 
     boss.addEventListener('click', () => {
+      if (clicks >= maxClicks) return; // prevenire click extra
+
       clicks++;
       const remaining = maxClicks - clicks;
+
+      // Aggiorna barra HP in percentuale
+      const hpPercent = ((remaining / maxClicks) * 100).toFixed(2);
+      hpBar.style.width = hpPercent + '%';
+
       if (remaining > 0) {
         message.textContent = `Hai colpito il Custode! Mancano ${remaining} colpi.`;
       } else {
