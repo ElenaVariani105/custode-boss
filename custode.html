@@ -24,18 +24,31 @@
     }
     #hpBarContainer {
       width: 300px;
-      height: 30px;
+      height: 20px;           /* più stretta */
       background: #444;
       border: 2px solid #9065b0;
       border-radius: 15px;
       margin: 0 auto 20px;
       overflow: hidden;
+      position: relative;
+      font-weight: bold;
+      font-size: 14px;
+      color: #eee;
+      user-select: none;
     }
     #hpBar {
       height: 100%;
       width: 100%;
       background: #9065b0;
       transition: width 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #eee;
+      text-shadow: 0 0 5px #000;
+      box-sizing: border-box;
+      padding: 0 5px;
+      white-space: nowrap;
     }
     #message {
       margin: 20px;
@@ -63,12 +76,12 @@
   <div id="boss" title="Cliccami per combattere il Custode!"></div>
 
   <div id="hpBarContainer">
-    <div id="hpBar"></div>
+    <div id="hpBar">HP: 1200 / 1200</div>
   </div>
-  
+
   <div id="message">Clicca 1200 volte per sconfiggere il Custode.</div>
 
-  <a id="secretLink" href="https://www.notion.so/The-Archive_Completed-229c2ace86f080c5a453ceaac543db86?source=copy_linkhttps://tuo-link-al-prossimo-livello.com" target="_blank">Vai a The Archive_Completed</a>
+  <a id="secretLink" href="https://www.notion.so/The-Archive_Completed-229c2ace86f080c5a453ceaac543db86?source=copy_link" target="_blank">Vai al prossimo livello</a>
 
   <script>
     const boss = document.getElementById('boss');
@@ -80,21 +93,21 @@
     const maxClicks = 1200;
 
     boss.addEventListener('click', () => {
-      if (clicks >= maxClicks) return; // prevenire click extra
+      if (clicks >= maxClicks) return;
 
       clicks++;
       const remaining = maxClicks - clicks;
 
-      // Aggiorna barra HP in percentuale
       const hpPercent = ((remaining / maxClicks) * 100).toFixed(2);
       hpBar.style.width = hpPercent + '%';
+      hpBar.textContent = `HP: ${remaining} / ${maxClicks}`;
 
       if (remaining > 0) {
         message.textContent = `Hai colpito il Custode! Mancano ${remaining} colpi.`;
       } else {
         message.textContent = 'Il Custode è stato sconfitto!';
         secretLink.style.display = 'inline-block';
-        boss.style.pointerEvents = 'none'; // disabilita altri click
+        boss.style.pointerEvents = 'none';
       }
     });
   </script>
