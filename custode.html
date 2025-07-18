@@ -76,10 +76,10 @@
   <div id="boss" title="Cliccami per combattere il Custode!"></div>
 
   <div id="hpBarContainer">
-    <div id="hpBar">HP: 1200 / 1200</div>
+    <div id="hpBar">HP: 1000 / 1000</div>
   </div>
 
-  <div id="message">Clicca 1200 volte per sconfiggere il Custode.</div>
+  <div id="message">Clicca 1000 volte per sconfiggere il Custode.</div>
 
   <a id="secretLink" href="https://www.notion.so/The-Archive_Completed-229c2ace86f080c5a453ceaac543db86?source=copy_link" target="_blank">Vai al prossimo livello</a>
 
@@ -90,7 +90,7 @@
     const hpBar = document.getElementById('hpBar');
 
     let clicks = 0;
-    const maxClicks = 1200;
+    const maxClicks = 1000;
 
     boss.addEventListener('click', () => {
       if (clicks >= maxClicks) return;
