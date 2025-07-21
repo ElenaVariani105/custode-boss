@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Il Custode - Boss Finale</title>
   <style>
     body {
@@ -24,7 +25,7 @@
     }
     #hpBarContainer {
       width: 300px;
-      height: 20px;           /* più stretta */
+      height: 20px; /* più stretta */
       background: #444;
       border: 2px solid #9065b0;
       border-radius: 15px;
@@ -76,10 +77,10 @@
   <div id="boss" title="Cliccami per combattere il Custode!"></div>
 
   <div id="hpBarContainer">
-    <div id="hpBar">HP: 1000 / 1000</div>
+    <div id="hpBar">HP: 420 / 420</div>
   </div>
 
-  <div id="message">Clicca 1000 volte per sconfiggere il Custode.</div>
+  <div id="message">Fase 1: Clicca 420 volte per sconfiggere il Custode.</div>
 
   <a id="secretLink" href="https://www.notion.so/The-Archive_Completed-229c2ace86f080c5a453ceaac543db86?source=copy_link" target="_blank">Vai al prossimo livello</a>
 
@@ -89,28 +90,43 @@
     const secretLink = document.getElementById('secretLink');
     const hpBar = document.getElementById('hpBar');
 
+    let phase = 1;
     let clicks = 0;
-    const maxClicks = 1000;
+    const phase1Max = 420;
+    const phase2Max = 1000;
+
+    let currentMax = phase1Max;
 
     boss.addEventListener('click', () => {
-      if (clicks >= maxClicks) return;
+      if (phase === 3) return; // già finito
 
       clicks++;
-      const remaining = maxClicks - clicks;
+      const remaining = currentMax - clicks;
 
-      const hpPercent = ((remaining / maxClicks) * 100).toFixed(2);
+      const hpPercent = ((remaining / currentMax) * 100).toFixed(2);
       hpBar.style.width = hpPercent + '%';
-      hpBar.textContent = `HP: ${remaining} / ${maxClicks}`;
+      hpBar.textContent = `HP: ${remaining > 0 ? remaining : 0} / ${currentMax}`;
 
       if (remaining > 0) {
-        message.textContent = `Hai colpito il Custode! Mancano ${remaining} colpi.`;
+        message.textContent = `Fase ${phase}: Colpisci il Custode! Mancano ${remaining} colpi.`;
       } else {
-        message.textContent = 'Il Custode è stato sconfitto!';
-        secretLink.style.display = 'inline-block';
-        boss.style.pointerEvents = 'none';
+        if (phase === 1) {
+          phase = 2;
+          clicks = 0;
+          currentMax = phase2Max;
+          hpBar.style.width = '100%';
+          hpBar.textContent = `HP: ${currentMax} / ${currentMax}`;
+          message.textContent = `Il Custode cambia forma! Fase 2 iniziata: 1000 colpi!`;
+        } else if (phase === 2) {
+          phase = 3;
+          message.textContent = 'Il Custode è stato sconfitto!';
+          secretLink.style.display = 'inline-block';
+          boss.style.pointerEvents = 'none';
+        }
       }
     });
   </script>
 
 </body>
 </html>
+
