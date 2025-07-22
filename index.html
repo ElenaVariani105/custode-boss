@@ -15,7 +15,7 @@
     #boss {
       width: 300px;
       height: 300px;
-      background: url('https://github.com/ElenaVariani105/custode-boss/blob/1809d25def13063bb321332c7c2d5023a891f75e/Fase-1.jpg') no-repeat center/contain;
+      background: url('https://raw.githubusercontent.com/ElenaVariani105/custode-boss/main/Fase-1.jpg') no-repeat center/contain;
       margin: 0 auto 20px;
       cursor: pointer;
       border: 3px solid #9065b0;
@@ -118,8 +118,8 @@
           hpBar.textContent = `HP: ${currentMax} / ${currentMax}`;
           message.textContent = `Il Custode cambia forma! Fase 2 iniziata: 1000 colpi!`;
 
-          // ✅ Cambia immagine per Fase 2
-          boss.style.backgroundImage = "url('https://github.com/ElenaVariani105/custode-boss/blob/a36150a38bf212293a893f6678db494d84cd6413/Fase-2.jpg')";
+          // Cambia immagine per Fase 2
+          boss.style.backgroundImage = "url('https://raw.githubusercontent.com/ElenaVariani105/custode-boss/main/Fase-2.jpg')";
         } else if (phase === 2) {
           phase = 3;
           message.textContent = 'Il Custode è stato sconfitto!';
